@@ -1,0 +1,6 @@
+{
+  "name": "MedConnect Pharma",
+  "description": "Plateforme moderne de promotion médicale, visite médicale, représentation pharmaceutique et catalogue de produits de santé.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
