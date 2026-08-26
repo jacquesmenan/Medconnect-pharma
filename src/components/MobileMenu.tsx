@@ -1,6 +1,7 @@
 import React from 'react';
-import { X, ChevronRight, Phone, Mail, MapPin, Pill, Calendar, Search } from 'lucide-react';
+import { X, ChevronRight, Phone, Mail, MapPin, Pill, Calendar, Search, Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { useTheme } from '../context/ThemeContext';
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -17,6 +18,8 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
   onNavigate,
   onOpenSearch
 }) => {
+  const { theme, toggleTheme, isDark } = useTheme();
+
   const links = [
     { id: 'home', label: 'Accueil' },
     { id: 'about', label: 'À propos de nous' },
@@ -53,25 +56,35 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="absolute inset-y-0 right-0 w-full max-w-sm bg-white shadow-2xl flex flex-col justify-between overflow-y-auto"
+            className="absolute inset-y-0 right-0 w-full max-w-sm bg-white dark:bg-slate-900 shadow-2xl flex flex-col justify-between overflow-y-auto border-l border-slate-200 dark:border-slate-800"
           >
             <div>
               {/* Header inside drawer */}
-              <div className="p-4 flex items-center justify-between border-b border-slate-100">
+              <div className="p-4 flex items-center justify-between border-b border-slate-100 dark:border-slate-800">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-sky-600 flex items-center justify-center text-white font-bold">
+                  <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold">
                     <Pill className="w-4 h-4 rotate-45" />
                   </div>
-                  <span className="font-bold text-slate-900 text-base">MedConnect Pharma</span>
+                  <span className="font-bold text-slate-900 dark:text-white text-base">MedConnect Pharma</span>
                 </div>
-                <button
-                  type="button"
-                  onClick={onClose}
-                  className="p-2 text-slate-400 hover:text-slate-700 rounded-lg"
-                  aria-label="Fermer le menu"
-                >
-                  <X className="w-5 h-5" />
-                </button>
+                <div className="flex items-center gap-1">
+                  <button
+                    type="button"
+                    onClick={toggleTheme}
+                    className="p-2 text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white rounded-lg transition-colors"
+                    aria-label="Basculer le thème"
+                  >
+                    {isDark ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4" />}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={onClose}
+                    className="p-2 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 rounded-lg"
+                    aria-label="Fermer le menu"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
               </div>
 
               {/* Quick Search Action */}
@@ -82,13 +95,13 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                     onClose();
                     onOpenSearch();
                   }}
-                  className="w-full py-2.5 px-3.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl text-xs font-medium flex items-center justify-between transition-colors"
+                  className="w-full py-2.5 px-3.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 rounded-xl text-xs font-medium flex items-center justify-between transition-colors border border-slate-200 dark:border-slate-700"
                 >
                   <span className="flex items-center gap-2">
-                    <Search className="w-4 h-4 text-slate-400" />
+                    <Search className="w-4 h-4 text-slate-400 dark:text-slate-500" />
                     Rechercher un produit, laboratoire...
                   </span>
-                  <span className="text-[10px] bg-white px-1.5 py-0.5 rounded border text-slate-400">⌘K</span>
+                  <span className="text-[10px] bg-white dark:bg-slate-900 px-1.5 py-0.5 rounded border border-slate-200 dark:border-slate-700 text-slate-400">⌘K</span>
                 </button>
               </div>
 
@@ -103,12 +116,12 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                       onClick={() => handleLinkClick(link.id)}
                       className={`w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-sm font-medium transition-all ${
                         isActive
-                          ? 'bg-sky-50 text-sky-700 font-semibold'
-                          : 'text-slate-700 hover:bg-slate-50'
+                          ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 font-semibold'
+                          : 'text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60'
                       }`}
                     >
                       <span>{link.label}</span>
-                      <ChevronRight className={`w-4 h-4 ${isActive ? 'text-sky-600' : 'text-slate-300'}`} />
+                      <ChevronRight className={`w-4 h-4 ${isActive ? 'text-blue-600 dark:text-blue-400' : 'text-slate-300 dark:text-slate-600'}`} />
                     </button>
                   );
                 })}
@@ -116,27 +129,27 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
             </div>
 
             {/* Quick Action & Contact Details Footer */}
-            <div className="p-4 bg-slate-50 border-t border-slate-100 space-y-3">
+            <div className="p-4 bg-slate-50 dark:bg-slate-950 border-t border-slate-100 dark:border-slate-800 space-y-3">
               <button
                 type="button"
                 onClick={() => handleLinkClick('contact', 'rdv_delegue')}
-                className="w-full py-3 bg-sky-600 hover:bg-sky-700 active:bg-sky-800 text-white rounded-xl text-xs font-semibold flex items-center justify-center gap-2 shadow-md transition-colors"
+                className="w-full py-3 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white rounded-xl text-xs font-semibold flex items-center justify-center gap-2 shadow-md transition-colors"
               >
                 <Calendar className="w-4 h-4" /> Prendre RDV avec un Délégué
               </button>
 
-              <div className="text-[11px] text-slate-500 space-y-1.5 pt-2">
+              <div className="text-[11px] text-slate-500 dark:text-slate-400 space-y-1.5 pt-2">
                 <p className="flex items-center gap-2">
-                  <Phone className="w-3.5 h-3.5 text-sky-600 shrink-0" />
-                  <span>+33 (0)1 89 48 01 00 (24h/24)</span>
+                  <Phone className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 shrink-0" />
+                  <span>+225 01 50 21 52 02 (24h/24)</span>
                 </p>
                 <p className="flex items-center gap-2">
-                  <Mail className="w-3.5 h-3.5 text-sky-600 shrink-0" />
+                  <Mail className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 shrink-0" />
                   <span>contact@medconnect-pharma.com</span>
                 </p>
                 <p className="flex items-center gap-2">
-                  <MapPin className="w-3.5 h-3.5 text-sky-600 shrink-0" />
-                  <span>Paris • Lyon • Abidjan • Casablanca</span>
+                  <MapPin className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 shrink-0" />
+                  <span>Abidjan, Côte d'Ivoire</span>
                 </p>
               </div>
             </div>
@@ -146,3 +159,4 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
     </AnimatePresence>
   );
 };
+

@@ -21,7 +21,7 @@ import { LaboratoryCard } from '../components/LaboratoryCard';
 import { ServiceCard } from '../components/ServiceCard';
 import { NewsCard } from '../components/NewsCard';
 import { TestimonialCard } from '../components/TestimonialCard';
-import { StatCard } from '../components/StatCard';
+import { StatsCards } from '../components/StatsCards';
 
 interface HomePageProps {
   onNavigate: (page: string, param?: string) => void;
@@ -338,26 +338,8 @@ export const HomePage: React.FC<HomePageProps> = ({
         </div>
       </section>
 
-      {/* 4. CHIFFRES CLES */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
-          <span className="text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-100 px-3.5 py-1.5 rounded-lg inline-block">
-            Impact & Présence
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-            Les chiffres clés de notre performance médicale
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-500">
-            Une force de frappe opérationnelle au service des laboratoires et des professionnels de santé.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6">
-          {stats.map((stat) => (
-            <StatCard key={stat.id} stat={stat} />
-          ))}
-        </div>
-      </section>
+      {/* 4. CHIFFRES CLÉS & INDICATEURS AVEC ANIMATION AU DÉFILEMENT */}
+      <StatsCards stats={stats} />
 
       {/* 5. PRODUITS PHARMACEUTIQUES */}
       <section className="max-w-7xl mx-auto px-4 sm:px-8 space-y-8">

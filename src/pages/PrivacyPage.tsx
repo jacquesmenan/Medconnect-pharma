@@ -65,7 +65,7 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({ onNavigate }) => {
           </p>
           <div className="mt-3 p-4 bg-sky-50 rounded-xl border border-sky-100 text-sky-950 font-medium">
             Email : <strong>dpo@medconnectpharma.com</strong><br />
-            Courrier : MedConnect Pharma SAS - DPO, 45 Avenue des Champs-Élysées, 75008 Paris, France.
+            Courrier : MedConnect Pharma SAS - DPO, Abidjan Cocody, Côte d'Ivoire.
           </div>
         </div>
       </article>

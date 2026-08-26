@@ -27,8 +27,8 @@ export const LegalPage: React.FC<LegalPageProps> = ({ onNavigate }) => {
             Le site <strong>medconnect-pharma.com</strong> est édité par la société <strong>MedConnect Pharma SAS</strong>, Société par Actions Simplifiée au capital social de 500 000 €, immatriculée au Registre du Commerce et des Sociétés de Paris sous le numéro B 512 849 103.
           </p>
           <ul className="list-disc pl-5 space-y-1 mt-2 text-slate-600">
-            <li><strong>Siège social :</strong> 45 Avenue des Champs-Élysées, 75008 Paris, France.</li>
-            <li><strong>Téléphone :</strong> +33 (0)1 42 68 00 00</li>
+            <li><strong>Siège & Direction :</strong> Abidjan Cocody, Côte d'Ivoire.</li>
+            <li><strong>Téléphone :</strong> +225 01 50 21 52 02</li>
             <li><strong>Directeur de la Publication :</strong> Dr. Alexandre Laurent, Président du Directoire.</li>
             <li><strong>Pharmacien Responsable :</strong> Dr. Éléonore Mercier, Directrice des Affaires Pharmaceutiques.</li>
           </ul>

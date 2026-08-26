@@ -11,7 +11,7 @@ export const WhatsAppButton: React.FC<WhatsAppButtonProps> = () => {
   const [message, setMessage] = useState('');
   const [hasSent, setHasSent] = useState(false);
 
-  const phoneNumber = '+33189480100'; // numéro médical officiel de support
+  const phoneNumber = '+2250150215202'; // Numéro officiel WhatsApp Côte d'Ivoire
   const defaultPrompt = 'Bonjour MedConnect Pharma, je souhaite échanger avec un délégué médical concernant votre catalogue.';
 
   const handleSend = (e: React.FormEvent) => {

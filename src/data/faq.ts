@@ -80,20 +80,28 @@ export const teamMembers: TeamMember[] = [
 
 export const statItems: StatItem[] = [
   {
-    id: 'stat-delegates',
-    value: 45,
+    id: 'stat-labs',
+    value: 50,
     suffix: '+',
-    label: 'Délégués Médicaux & Pharmaceutiques',
-    description: 'Une force de terrain mobile, hautement qualifiée et géo-répartie',
-    iconName: 'Users'
+    label: 'Laboratoires Partenaires',
+    description: 'Groupes pharmaceutiques internationaux et régionaux sous contrat exclusif',
+    iconName: 'Building2'
   },
   {
-    id: 'stat-labs',
-    value: 12,
-    suffix: '',
-    label: 'Laboratoires Partenaires',
-    description: 'Marques pharmaceutiques internationales nous accordant leur confiance',
-    iconName: 'Building2'
+    id: 'stat-products',
+    value: 500,
+    suffix: '+',
+    label: 'Produits & Références',
+    description: 'Spécialités hospitalières, princeps, génériques de précision et dispositifs',
+    iconName: 'Pill'
+  },
+  {
+    id: 'stat-visits',
+    value: 1000,
+    suffix: '+',
+    label: 'Visites Médicales / mois',
+    description: 'Entretiens scientifiques individuels en cabinets de ville, cliniques et CHU',
+    iconName: 'Stethoscope'
   },
   {
     id: 'stat-pharmacies',
@@ -104,19 +112,11 @@ export const statItems: StatItem[] = [
     iconName: 'Store'
   },
   {
-    id: 'stat-doctors',
-    value: 2400,
-    suffix: '+',
-    label: 'Médecins Prescripteurs Ciblés',
-    description: 'Généralistes et spécialistes engagés dans une relation de confiance scientifique',
-    iconName: 'Stethoscope'
-  },
-  {
-    id: 'stat-years',
-    value: 15,
-    suffix: ' ans',
-    label: 'Années d’Excellence',
-    description: 'D’expertise reconnue en promotion éthique et market access',
+    id: 'stat-satisfaction',
+    value: 98,
+    suffix: '%',
+    label: 'Taux de Satisfaction',
+    description: 'Recommandation globale auprès des prescripteurs et praticiens de santé',
     iconName: 'ShieldCheck'
   }
 ];

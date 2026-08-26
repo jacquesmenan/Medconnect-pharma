@@ -204,7 +204,7 @@ export const CareersPage: React.FC<CareersPageProps> = ({ onNavigate }) => {
               required
               value={candidatePhone}
               onChange={(e) => setCandidatePhone(e.target.value)}
-              placeholder="+33 6 12 34 56 78"
+              placeholder="+225 01 50 21 52 02"
               className="w-full p-2.5 rounded-xl bg-white/10 border border-white/20 text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400"
             />
           </div>

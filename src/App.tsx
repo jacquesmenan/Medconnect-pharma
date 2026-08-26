@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ToastProvider } from './context/ToastContext';
+import { ThemeProvider } from './context/ThemeContext';
 import { Header } from './components/Header';
 import { MobileMenu } from './components/MobileMenu';
 import { Footer } from './components/Footer';
@@ -26,10 +27,14 @@ import { PrivacyPage } from './pages/PrivacyPage';
 import { LegalPage } from './pages/LegalPage';
 
 import { Product } from './types';
+import { usePageSeo } from './hooks/usePageSeo';
 
 export function App() {
   const [currentPage, setCurrentPage] = useState<string>('home');
   const [pageParam, setPageParam] = useState<string | undefined>(undefined);
+
+  // Automatically inject and update dynamic SEO meta tags in <head>
+  usePageSeo(currentPage, pageParam);
 
   // Modals
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -156,63 +161,65 @@ export function App() {
   };
 
   return (
-    <ToastProvider>
-      <div className="min-h-screen flex flex-col bg-slate-50 text-slate-800 font-sans antialiased selection:bg-sky-500 selection:text-white">
-        {/* Global Navigation Header */}
-        <Header
-          currentPage={currentPage}
-          onNavigate={navigate}
-          onOpenMobileMenu={() => setIsMobileMenuOpen(true)}
-          onOpenSearch={() => setIsSearchModalOpen(true)}
-          onRequestMeeting={() => handleOpenMeetingModal()}
-        />
+    <ThemeProvider>
+      <ToastProvider>
+        <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-[#080e1a] text-slate-800 dark:text-slate-100 font-sans antialiased selection:bg-blue-600 selection:text-white transition-colors duration-200">
+          {/* Global Navigation Header */}
+          <Header
+            currentPage={currentPage}
+            onNavigate={navigate}
+            onOpenMobileMenu={() => setIsMobileMenuOpen(true)}
+            onOpenSearch={() => setIsSearchModalOpen(true)}
+            onRequestMeeting={() => handleOpenMeetingModal()}
+          />
 
-        {/* Mobile Navigation Drawer */}
-        <MobileMenu
-          isOpen={isMobileMenuOpen}
-          onClose={() => setIsMobileMenuOpen(false)}
-          currentPage={currentPage}
-          onNavigate={navigate}
-          onRequestMeeting={() => handleOpenMeetingModal()}
-        />
+          {/* Mobile Navigation Drawer */}
+          <MobileMenu
+            isOpen={isMobileMenuOpen}
+            onClose={() => setIsMobileMenuOpen(false)}
+            currentPage={currentPage}
+            onNavigate={navigate}
+            onOpenSearch={() => setIsSearchModalOpen(true)}
+          />
 
-        {/* Main Routed Page Content */}
-        <main className="flex-1 w-full">{renderPage()}</main>
+          {/* Main Routed Page Content */}
+          <main className="flex-1 w-full">{renderPage()}</main>
 
-        {/* Global Footer */}
-        <Footer onNavigate={navigate} />
+          {/* Global Footer */}
+          <Footer onNavigate={navigate} />
 
-        {/* Global Instant Search Modal (Cmd+K / Search button) */}
-        <GlobalSearchModal
-          isOpen={isSearchModalOpen}
-          onClose={() => setIsSearchModalOpen(false)}
-          onNavigate={navigate}
-          onOpenQuickView={handleOpenQuickView}
-        />
+          {/* Global Instant Search Modal (Cmd+K / Search button) */}
+          <GlobalSearchModal
+            isOpen={isSearchModalOpen}
+            onClose={() => setIsSearchModalOpen(false)}
+            onNavigate={navigate}
+            onOpenQuickView={handleOpenQuickView}
+          />
 
-        {/* Product Fast Quick View Modal */}
-        <ProductQuickViewModal
-          product={quickViewProduct}
-          isOpen={!!quickViewProduct}
-          onClose={handleCloseQuickView}
-          onViewFullDetails={(prodId) => navigate('product-detail', prodId)}
-          onNavigateToLab={(labId) => navigate('laboratory-detail', labId)}
-        />
+          {/* Product Fast Quick View Modal */}
+          <ProductQuickViewModal
+            product={quickViewProduct}
+            isOpen={!!quickViewProduct}
+            onClose={handleCloseQuickView}
+            onViewFullDetails={(prodId) => navigate('product-detail', prodId)}
+            onNavigateToLab={(labId) => navigate('laboratory-detail', labId)}
+          />
 
-        {/* Medical Meeting Booking Modal */}
-        <RequestMeetingModal
-          isOpen={isMeetingModalOpen}
-          onClose={handleCloseMeetingModal}
-          defaultServiceTitle={meetingDefaultTopic}
-        />
+          {/* Medical Meeting Booking Modal */}
+          <RequestMeetingModal
+            isOpen={isMeetingModalOpen}
+            onClose={handleCloseMeetingModal}
+            defaultServiceTitle={meetingDefaultTopic}
+          />
 
-        {/* Floating WhatsApp Action Button */}
-        <WhatsAppButton />
+          {/* Floating WhatsApp Action Button */}
+          <WhatsAppButton />
 
-        {/* RGPD Cookie Banner */}
-        <CookieBanner onNavigateToPrivacy={() => navigate('privacy')} />
-      </div>
-    </ToastProvider>
+          {/* RGPD Cookie Banner */}
+          <CookieBanner onNavigateToPrivacy={() => navigate('privacy')} />
+        </div>
+      </ToastProvider>
+    </ThemeProvider>
   );
 }
 
